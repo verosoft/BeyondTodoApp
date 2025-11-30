@@ -46,7 +46,7 @@ El proyecto `BeyondTodoDomain` es el **corazón de la solución** y representa l
 
 ### Uso Común para API y Consola
 
-Una de las mayores ventajas de esta arquitectura es que el dominio se comparte entre múltiples aplicaciones cliente. Tanto `BeyondTodoApi` como la aplicación de consola `BeyondTodoApp` utilizan `BeyondTodoDomain` (a través de `BeyondTodoApiService`) para ejecutar sus operaciones.
+Una de las mayores ventajas de esta arquitectura es que el dominio se comparte entre múltiples aplicaciones cliente. Tanto `BeyondTodoApi` como la aplicación de consola `BeyondTodoApp` utilizan `BeyondTodoDomain` (a través de `BeyondTodoApiService` y de `BeyondTodoServices` respectivamente) para ejecutar sus operaciones.
 
 -   **Consistencia**: Todas las reglas de negocio, como la validación de un `TodoItem` o la lógica para registrar un progreso, están definidas en un solo lugar. Esto garantiza que la lógica sea consistente sin importar si la acción se origina desde una llamada a la API o desde la aplicación de consola.
 -   **Reutilización**: Se evita la duplicación de código. La lógica de negocio no necesita ser reescrita para diferentes interfaces.
