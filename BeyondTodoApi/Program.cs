@@ -58,7 +58,30 @@ app.MapPatch("/todos/{id}/progress", (int id, RegisterProgressRequest request, I
 .WithName("RegisterProgress")
 .WithOpenApi();
 
+app.MapPatch("/todos/{id}/description", (int id, UpdateTodoDescriptionRequest request, ITodoService todoService) =>
+{
+    var result = todoService.UpdateTodoDescription(id, request.NewDescription);
+
+    return result.IsSuccess
+        ? Results.Ok(ApiResponse<bool>.SuccessResponse(result.Value, "Todo description updated successfully."))
+        : Results.BadRequest(ApiResponse<bool>.ErrorResponse(result.Error ?? "Failed to update todo description."));
+})
+.WithName("UpdateTodoDescription")
+.WithOpenApi();
+
+app.MapDelete("/todos/{id}", (int id, ITodoService todoService) =>
+{
+    var result = todoService.RemoveTodoItem(id);
+
+    return result.IsSuccess
+        ? Results.Ok(ApiResponse<bool>.SuccessResponse(result.Value, "Todo item removed successfully."))
+        : Results.BadRequest(ApiResponse<bool>.ErrorResponse(result.Error ?? "Failed to remove todo item."));
+})
+.WithName("RemoveTodoItem")
+.WithOpenApi();
+
 app.Run();
 
 record CreateTodoItemRequest(string Title, string Description, string Category);
 record RegisterProgressRequest(DateTime DateTime, decimal Percent);
+record UpdateTodoDescriptionRequest(string NewDescription);

@@ -27,5 +27,21 @@ Content-Type: application/json
   "percent": 3.5
 }
 
+###
+
+PATCH {{BeyondTodoApi_HostAddress}}/todos/1/description
+Content-Type: application/json
+
+{
+  "newDescription": "Complete the C# programming language fundamentals course."
+}
+
+###
+
+DELETE {{BeyondTodoApi_HostAddress}}/todos/2
+Content-Type: application/json
+
+
+
 
 
