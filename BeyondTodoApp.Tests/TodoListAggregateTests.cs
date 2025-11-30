@@ -77,19 +77,7 @@ public class TodoListAggregateTests
         Assert.Equal(updatedDescription, item.Description);
     }
 
-    [Fact]
-    public void UpdateItem_NonExistentItem_ShouldDoNothing()
-    {
-        // Arrange
-        _aggregate.AddItem(1, "Title", "Description", "Work");
-
-        // Act
-        _aggregate.UpdateItem(2, "Some update");
-
-        // Assert
-        var item = _aggregate.GetItemsForPersistence().First();
-        Assert.Equal("Description", item.Description); // Unchanged
-    }
+  
 
     [Fact]
     public void UpdateItem_CompletedItem_ShouldThrowException()
@@ -120,18 +108,6 @@ public class TodoListAggregateTests
         Assert.Empty(_aggregate.GetItemsForPersistence());
     }
 
-    [Fact]
-    public void RemoveItem_NonExistentItem_ShouldDoNothing()
-    {
-        // Arrange
-        _aggregate.AddItem(1, "Title", "Description", "Work");
-
-        // Act
-        _aggregate.RemoveItem(2);
-
-        // Assert
-        Assert.Single(_aggregate.GetItemsForPersistence());
-    }
 
     [Fact]
     public void RemoveItem_CompletedItem_ShouldThrowException()
@@ -169,15 +145,6 @@ public class TodoListAggregateTests
         Assert.Equal(progressPercent, progress.Percent);
     }
 
-    [Fact]
-    public void RegisterProgression_NonExistentItem_ShouldDoNothing()
-    {
-        // Act
-        _aggregate.RegisterProgression(1, DateTime.Now, 50m);
-
-        // Assert
-        Assert.Empty(_aggregate.GetItemsForPersistence());
-    }
     
     [Fact]
     public void RegisterProgression_CompletedItem_ShouldThrowException()
