@@ -23,8 +23,8 @@ public class TodoListAggregate(ITodoListRepository repository, ILogger<TodoListA
 
     public void UpdateItem(int id, string description)
     {
-        var item = _items.FirstOrDefault(i => i.Id == id);
-        if (item == null) return;
+        var item = _items.FirstOrDefault(i => i.Id == id) ?? throw new Exception($"El item con Id: {id}, no existe", new KeyNotFoundException());
+
         try
         {
             item.UpdateDescription(description);
@@ -39,8 +39,7 @@ public class TodoListAggregate(ITodoListRepository repository, ILogger<TodoListA
 
     public void RemoveItem(int id)
     {
-        var item = _items.FirstOrDefault(i => i.Id == id);
-        if (item == null) return;
+        var item = _items.FirstOrDefault(i => i.Id == id) ?? throw new Exception($"El item con Id: {id}, no existe", new KeyNotFoundException());
         try
         {
             item.ValidateModificationAllowed();
@@ -56,13 +55,13 @@ public class TodoListAggregate(ITodoListRepository repository, ILogger<TodoListA
 
     public void RegisterProgression(int id, DateTime dateTime, decimal percent)
     {
-        var item = _items.FirstOrDefault(i => i.Id == id);
-        if (item == null) return;
+        var item = _items.FirstOrDefault(i => i.Id == id) ?? throw new Exception($"El item con Id: {id}, no existe", new KeyNotFoundException());
+
         try { item.AddProgression(dateTime, percent); }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error registrando progresión en item {Id}", id);
-             throw new Exception($"Error registrando progresión en item {id}", new InvalidOperationException());
+            throw new Exception($"Error registrando progresión en item {id}", new InvalidOperationException());
 
         }
     }
