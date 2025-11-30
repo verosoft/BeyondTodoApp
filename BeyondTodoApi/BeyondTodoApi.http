@@ -18,7 +18,9 @@ GET {{BeyondTodoApi_HostAddress}}/todos
 Content-Type: application/json
 
 ###
-
+return result.IsSuccess
+        ? Results.Ok(ApiResponse<bool>.SuccessResponse(result.Value, "Todo item removed successfully."))
+    
 PATCH {{BeyondTodoApi_HostAddress}}/todos/1/progress
 Content-Type: application/json
 

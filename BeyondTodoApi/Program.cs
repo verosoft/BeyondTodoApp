@@ -14,6 +14,15 @@ builder.Services.AddSingleton<ITodoList, TodoListAggregate>();
 builder.Services.AddTransient<ITodoListDataBaseRepository, TodoListDatabaseRepository>();
 builder.Services.AddTransient<ITodoService, TodoServices>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin() // ¡Permite CUALQUIER dominio!, No recomendado para producción
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -24,6 +33,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.MapPost("/todos", (CreateTodoItemRequest request, ITodoService todoService) =>
 {
@@ -73,6 +84,7 @@ app.MapDelete("/todos/{id}", (int id, ITodoService todoService) =>
 {
     var result = todoService.RemoveTodoItem(id);
 
+    
     return result.IsSuccess
         ? Results.Ok(ApiResponse<bool>.SuccessResponse(result.Value, "Todo item removed successfully."))
         : Results.BadRequest(ApiResponse<bool>.ErrorResponse(result.Error ?? "Failed to remove todo item."));
