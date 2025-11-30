@@ -1,5 +1,4 @@
 ﻿using BeyondTodoDomain;
-using BeyondTodoDomain.Entities;
 
 namespace BeyondTodoApiService;
 
@@ -9,7 +8,7 @@ public interface ITodoService
     Result<bool> RegisterProgress(int id, DateTime dateTime, decimal percent);
     Result<bool> UpdateTodoDescription(int id, string newDescription);
     Result<bool> RemoveTodoItem(int id);
-    Result<IReadOnlyList<TodoItem>> GetAllTodos();
+    Result<IReadOnlyList<TodoItemDtos>> GetAllTodos();
     void DisplayItems();
 
     void Save();

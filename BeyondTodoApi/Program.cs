@@ -3,7 +3,6 @@ using BeyondTodoDomain;
 using BeyondTodoDomain.Interfaces;
 using BeyondTodoApiService;
 using BeyondTodoApi.Models.Response;
-using BeyondTodoDomain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,12 +41,24 @@ app.MapGet("/todos", (ITodoService todoService) =>
     var result = todoService.GetAllTodos();
 
     return result.IsSuccess
-        ? Results.Ok(ApiResponse<IReadOnlyList<TodoItem>>.SuccessResponse(result.Value, "Todos retrieved successfully."))
-        : Results.BadRequest(ApiResponse<IReadOnlyList<TodoItem>>.ErrorResponse(result.Error ?? "Failed to retrieve todos."));
+        ? Results.Ok(ApiResponse<IReadOnlyList<TodoItemDtos>>.SuccessResponse(result.Value, "Todos retrieved successfully."))
+        : Results.BadRequest(ApiResponse<IReadOnlyList<TodoItemDtos>>.ErrorResponse(result.Error ?? "Failed to retrieve todos."));
 })
 .WithName("GetAllTodos")
+.WithOpenApi();
+
+app.MapPatch("/todos/{id}/progress", (int id, RegisterProgressRequest request, ITodoService todoService) =>
+{
+    var result = todoService.RegisterProgress(id, request.DateTime, request.Percent);
+
+    return result.IsSuccess
+        ? Results.Ok(ApiResponse<bool>.SuccessResponse(result.Value, "Progress registered successfully."))
+        : Results.BadRequest(ApiResponse<bool>.ErrorResponse(result.Error ?? "Failed to register progress."));
+})
+.WithName("RegisterProgress")
 .WithOpenApi();
 
 app.Run();
 
 record CreateTodoItemRequest(string Title, string Description, string Category);
+record RegisterProgressRequest(DateTime DateTime, decimal Percent);

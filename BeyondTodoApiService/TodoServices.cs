@@ -1,5 +1,4 @@
 using BeyondTodoDomain;
-using BeyondTodoDomain.Entities;
 using BeyondTodoDomain.Interfaces;
 
 namespace BeyondTodoApiService;
@@ -34,10 +33,14 @@ public class TodoServices(ITodoListRepository todoListRepository, ITodoList todo
         Console.WriteLine("---------------------------------");
     }
 
-    public Result<IReadOnlyList<TodoItem>> GetAllTodos()
+    public Result<IReadOnlyList<TodoItemDtos>> GetAllTodos()
     {
         var allTodos = ((TodoListAggregate)_todoListAggregate).GetItemsForPersistence();
-        return Result<IReadOnlyList<TodoItem>>.Success(allTodos);
+        return Result<IReadOnlyList<TodoItemDtos>>.Success([.. allTodos.Select(t=> new TodoItemDtos(t.Id, t.Title, t.Description, t.Category)
+        {
+            Progressions = [.. t.Progressions.Select(p => new BeyondTodoApiService.Progression(p.Date, p.Percent))],
+
+        })]);
     }
 
     public Result<bool> RegisterProgress(int id, DateTime dateTime, decimal percent)

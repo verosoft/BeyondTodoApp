@@ -17,3 +17,15 @@ Content-Type: application/json
 GET {{BeyondTodoApi_HostAddress}}/todos
 Content-Type: application/json
 
+###
+
+PATCH {{BeyondTodoApi_HostAddress}}/todos/1/progress
+Content-Type: application/json
+
+{
+  "dateTime": "2023-12-06T10:00:00Z",
+  "percent": 3.5
+}
+
+
+
