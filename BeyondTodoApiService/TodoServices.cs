@@ -1,4 +1,5 @@
 using BeyondTodoDomain;
+using BeyondTodoDomain.Entities;
 using BeyondTodoDomain.Interfaces;
 
 namespace BeyondTodoApiService;
@@ -31,6 +32,12 @@ public class TodoServices(ITodoListRepository todoListRepository, ITodoList todo
         Console.WriteLine("\n--- LISTA DE TODO ITEMS ACTUAL ---");
         _todoListAggregate.PrintItems();
         Console.WriteLine("---------------------------------");
+    }
+
+    public Result<IReadOnlyList<TodoItem>> GetAllTodos()
+    {
+        var allTodos = ((TodoListAggregate)_todoListAggregate).GetItemsForPersistence();
+        return Result<IReadOnlyList<TodoItem>>.Success(allTodos);
     }
 
     public Result<bool> RegisterProgress(int id, DateTime dateTime, decimal percent)

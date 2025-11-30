@@ -3,6 +3,7 @@ using BeyondTodoDomain;
 using BeyondTodoDomain.Interfaces;
 using BeyondTodoApiService;
 using BeyondTodoApi.Models.Response;
+using BeyondTodoDomain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSingleton<ITodoListRepository, TodoListRepository>();
-builder.Services.AddTransient<ITodoList, TodoListAggregate>();
+builder.Services.AddSingleton<ITodoList, TodoListAggregate>();
 builder.Services.AddTransient<ITodoListDataBaseRepository, TodoListDatabaseRepository>();
 builder.Services.AddTransient<ITodoService, TodoServices>();
 
@@ -36,7 +37,16 @@ app.MapPost("/todos", (CreateTodoItemRequest request, ITodoService todoService) 
 .WithName("CreateTodoItem")
 .WithOpenApi();
 
+app.MapGet("/todos", (ITodoService todoService) =>
+{
+    var result = todoService.GetAllTodos();
 
+    return result.IsSuccess
+        ? Results.Ok(ApiResponse<IReadOnlyList<TodoItem>>.SuccessResponse(result.Value, "Todos retrieved successfully."))
+        : Results.BadRequest(ApiResponse<IReadOnlyList<TodoItem>>.ErrorResponse(result.Error ?? "Failed to retrieve todos."));
+})
+.WithName("GetAllTodos")
+.WithOpenApi();
 
 app.Run();
 
