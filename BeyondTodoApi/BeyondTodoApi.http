@@ -18,15 +18,14 @@ GET {{BeyondTodoApi_HostAddress}}/todos
 Content-Type: application/json
 
 ###
-return result.IsSuccess
-        ? Results.Ok(ApiResponse<bool>.SuccessResponse(result.Value, "Todo item removed successfully."))
+
     
-PATCH {{BeyondTodoApi_HostAddress}}/todos/1/progress
+PATCH {{BeyondTodoApi_HostAddress}}/todos/10/progress
 Content-Type: application/json
 
 {
-  "dateTime": "2023-12-06T10:00:00Z",
-  "percent": 3.5
+  "dateTime": "2023-12-07T10:00:00Z",
+  "percent": 50
 }
 
 ###
