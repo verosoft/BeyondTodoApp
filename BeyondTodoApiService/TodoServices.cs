@@ -17,7 +17,7 @@ public class TodoServices(ITodoListRepository todoListRepository, ITodoList todo
         try
         {
             _todoListAggregate.AddItem(id, title, description, category);
-                       return Result<bool>.Success(true);
+            return Result<bool>.Success(true);
 
         }
         catch (Exception ex)
@@ -61,7 +61,7 @@ public class TodoServices(ITodoListRepository todoListRepository, ITodoList todo
 
     public void Save()
     {
-         _todoListDataBaseRepository.Save((TodoListAggregate)_todoListAggregate);
+        _todoListDataBaseRepository.Save((TodoListAggregate)_todoListAggregate);
     }
 
     public Result<bool> UpdateTodoDescription(int id, string newDescription)
