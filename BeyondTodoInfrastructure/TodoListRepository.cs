@@ -10,5 +10,4 @@ public class TodoListRepository : ITodoListRepository
     public int GetNextId() => _currentId++;
     public List<string> GetAllCategories() => ["Work", "Personal", "Hobby"];
 
-
 }

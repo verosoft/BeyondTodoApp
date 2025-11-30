@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../BeyondTodoApiInfrastructure/BeyondTodoApiInfrastructure.csproj" />
+    <ProjectReference Include="../BeyondTodoApiService/BeyondTodoApiService.csproj" />
+    <ProjectReference Include="../BeyondTodoDomain/BeyondTodoDomain.csproj" />
+  </ItemGroup>
+
 </Project>
