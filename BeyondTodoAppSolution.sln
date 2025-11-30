@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondTodoServices", "Beyon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondTodoInfrastructure", "BeyondTodoInfrastructure\BeyondTodoInfrastructure.csproj", "{D7EE8AEB-00C2-4087-9B02-6E75A5B5A3AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondTodoApi", "BeyondTodoApi\BeyondTodoApi.csproj", "{05F667C9-C09B-46B3-8440-374B26CAD62B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondTodoApiService", "BeyondTodoApiService\BeyondTodoApiService.csproj", "{42537AFA-7D40-44E3-881F-C48A36AD9034}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondTodoApiInfrastructure", "BeyondTodoApiInfrastructure\BeyondTodoApiInfrastructure.csproj", "{C851856D-362A-4130-8974-E59B1A09F54E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +48,17 @@ Global
 		{D7EE8AEB-00C2-4087-9B02-6E75A5B5A3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7EE8AEB-00C2-4087-9B02-6E75A5B5A3AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7EE8AEB-00C2-4087-9B02-6E75A5B5A3AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F667C9-C09B-46B3-8440-374B26CAD62B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F667C9-C09B-46B3-8440-374B26CAD62B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F667C9-C09B-46B3-8440-374B26CAD62B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F667C9-C09B-46B3-8440-374B26CAD62B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42537AFA-7D40-44E3-881F-C48A36AD9034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42537AFA-7D40-44E3-881F-C48A36AD9034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42537AFA-7D40-44E3-881F-C48A36AD9034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42537AFA-7D40-44E3-881F-C48A36AD9034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C851856D-362A-4130-8974-E59B1A09F54E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C851856D-362A-4130-8974-E59B1A09F54E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C851856D-362A-4130-8974-E59B1A09F54E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C851856D-362A-4130-8974-E59B1A09F54E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
